@@ -45,31 +45,53 @@ function App() {
       console.log(todoList);
   }
 
+/*
   const CheckIsDone = (props) => {
     console.log(props);
     const isDone = props.isDone;
-    if(isDone) {
-      <h1>me true</h1>
+    const listName = props.listName;
+    if(!isDone) {
+      return (
+        <Space direction="vertical" style={{ marginTop: 24 }}>
+          <Card title={listName} style={{ width: 600 }}>
+            <Button style={{ marginRight: "16px" }} type="primary">Duplicate</Button>
+            <Button style={{ marginRight: "16px" }} >Done</Button>
+            <Button danger>Delete</Button>
+          </Card>
+        </Space>
+      )
     } else {
-        <h1>me false</h1>
+        return (
+          <Space direction="vertical" style={{ marginTop: 24 }}>
+            <Card
+              title={listName}
+              style={{ width: 600, textDecoration: "line-through" }}
+            >
+              <Button style={{ marginRight: "16px" }} type="primary">
+                Duplicate
+              </Button>
+              <Button style={{ marginRight: "16px" }}>Undone</Button>
+              <Button danger>Delete</Button>
+            </Card>
+          </Space>
+        )
     }
   }
+  */
 
   useEffect (() => {
     console.log("effect");
     }, [])
 
-  const MyMinki = () => {
-    console.log("my Minki");
-  }
 
   return (
+
     <Container>
       <Space>
         <Input type="text" style={{ width: 400 }} placeholder="Enter Task Name" onChange={event => setItem(event.target.value)} />
         <Button type="primary" onClick={ () => addNewItem() }>Create Task</Button>
       </Space>
-      
+
       <div className="tasks">
         {todoList.map((item, index) => (
             <div>
@@ -80,7 +102,6 @@ function App() {
                   <Button danger>Delete</Button>
                 </Card>
               </Space>
-
             </div>
         ))}
       </div>
