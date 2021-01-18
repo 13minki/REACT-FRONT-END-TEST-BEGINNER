@@ -71,11 +71,16 @@ function App() {
     setTodoList(newItemList);
   }
 
+  const remove = index =>{
+    const list = [...todoList] ;
+    list.splice(index,1);
+    setTodoList(list);
+  }
+
   const ReadList=(props)=> {
     const isDone = props.isDone;
     const title = props.title;
     const index = props.index;
-
 
     return (
       <Card
@@ -86,7 +91,7 @@ function App() {
           Duplicate
         </Button>
         <Button style={{ marginRight: "16px" }} onClick={() => completed(index)}>{ isDone ? "Undone" : "Done"}</Button>
-        <Button danger>Delete</Button>
+        <Button danger onClick={() => remove(index)}>Delete</Button>
       </Card>
     );
 
