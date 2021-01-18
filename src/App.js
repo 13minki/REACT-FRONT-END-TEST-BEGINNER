@@ -1,6 +1,8 @@
 import { Button, Card, Input, Space } from "antd";
 import styled from "styled-components";
 import React , { useState , useEffect } from 'react';
+import "./index.css";
+
 
 const Container = styled.div`
   display: flex;
@@ -11,6 +13,7 @@ const Container = styled.div`
   height: 100vh;
   padding: 16px 24px;
 `;
+
 
 
 function App() {
@@ -41,43 +44,40 @@ function App() {
         ...newItem
       ];
       setTodoList(newItemList);
-      console.log(newItemList);
       console.log(todoList);
   }
 
-/*
-  const CheckIsDone = (props) => {
-    console.log(props);
-    const isDone = props.isDone;
-    const listName = props.listName;
-    if(!isDone) {
-      return (
-        <Space direction="vertical" style={{ marginTop: 24 }}>
-          <Card title={listName} style={{ width: 600 }}>
-            <Button style={{ marginRight: "16px" }} type="primary">Duplicate</Button>
-            <Button style={{ marginRight: "16px" }} >Done</Button>
-            <Button danger>Delete</Button>
-          </Card>
-        </Space>
-      )
+  const completed = index => {
+    const newTodos = [...todoList];
+    if(todoList[index].isDone) {
+      todoList[index].isDone = false;
+      setTodoList(newTodos);
     } else {
-        return (
-          <Space direction="vertical" style={{ marginTop: 24 }}>
-            <Card
-              title={listName}
-              style={{ width: 600, textDecoration: "line-through" }}
-            >
-              <Button style={{ marginRight: "16px" }} type="primary">
-                Duplicate
-              </Button>
-              <Button style={{ marginRight: "16px" }}>Undone</Button>
-              <Button danger>Delete</Button>
-            </Card>
-          </Space>
-        )
+      todoList[index].isDone = true;
+      setTodoList(newTodos);
     }
   }
-  */
+
+  const ReadList=(props)=> {
+    const isDone = props.isDone;
+    const title = props.title;
+    const index = props.index;
+
+
+    return (
+      <Card
+        title={title}
+        style={{ width: 600 ,  textDecoration: isDone ? "line-through" : "" }}
+      >
+        <Button style={{ marginRight: "16px" }} type="primary">
+          Duplicate
+        </Button>
+        <Button style={{ marginRight: "16px" }} onClick={() => completed(index)}>{ isDone ? "Undone" : "Done"}</Button>
+        <Button danger>Delete</Button>
+      </Card>
+    );
+
+  }
 
   useEffect (() => {
     console.log("effect");
@@ -94,33 +94,18 @@ function App() {
 
       <div className="tasks">
         {todoList.map((item, index) => (
-            <div>
-              <Space direction="vertical" style={{ marginTop: 24 }}>
-                <Card title={item.title} style={{ width: 600 }}>
-                  <Button style={{ marginRight: "16px" }} type="primary">Duplicate</Button>
-                  <Button style={{ marginRight: "16px" }} >Done</Button>
-                  <Button danger>Delete</Button>
-                </Card>
-              </Space>
+            <div key={index}>
+              <ReadList
+                isDone={item.isDone}
+                title={item.title.toString()}
+                index={index}
+                />
             </div>
         ))}
       </div>
 
-      <Space direction="vertical" style={{ marginTop: 24 }}>
-        <Card
-          title="Sample Task (Done)"
-          style={{ width: 600, textDecoration: "line-through" }}
-        >
-          <Button style={{ marginRight: "16px" }} type="primary">
-            Duplicate
-          </Button>
-          <Button style={{ marginRight: "16px" }}>Undone</Button>
-          <Button danger>Delete</Button>
-        </Card>
-      </Space>
-
-
     </Container>
+
   );
 
 
