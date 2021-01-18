@@ -21,7 +21,7 @@ function App() {
       <Space direction="vertical" style={{ marginTop: 24 }}>
         <Card title="Sample Task" style={{ width: 600 }}>
           <Button style={{ marginRight: "16px" }} type="primary">
-            Delete
+            Duplicate
           </Button>
           <Button style={{ marginRight: "16px" }}>Done</Button>
           <Button danger>Delete</Button>
@@ -33,7 +33,7 @@ function App() {
           style={{ width: 600, textDecoration: "line-through" }}
         >
           <Button style={{ marginRight: "16px" }} type="primary">
-            Delete
+            Duplicate
           </Button>
           <Button style={{ marginRight: "16px" }}>Undone</Button>
           <Button danger>Delete</Button>
