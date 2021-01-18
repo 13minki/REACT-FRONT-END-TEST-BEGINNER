@@ -49,13 +49,26 @@ function App() {
 
   const completed = index => {
     const newTodos = [...todoList];
-    if(todoList[index].isDone) {
-      todoList[index].isDone = false;
-      setTodoList(newTodos);
+    if(newTodos[index].isDone) {
+      newTodos[index].isDone = false;
     } else {
       todoList[index].isDone = true;
-      setTodoList(newTodos);
     }
+    setTodoList(newTodos);
+  }
+
+  const duplicate = index =>{
+    const dupItem = [
+      {
+         title: todoList[index].title,
+         isDone: todoList[index].isDone
+       }
+    ];
+    const newItemList = [
+      ...todoList,
+      ...dupItem
+    ];
+    setTodoList(newItemList);
   }
 
   const ReadList=(props)=> {
@@ -69,7 +82,7 @@ function App() {
         title={title}
         style={{ width: 600 ,  textDecoration: isDone ? "line-through" : "" }}
       >
-        <Button style={{ marginRight: "16px" }} type="primary">
+        <Button style={{ marginRight: "16px" }} type="primary" onClick={() => duplicate(index)}>
           Duplicate
         </Button>
         <Button style={{ marginRight: "16px" }} onClick={() => completed(index)}>{ isDone ? "Undone" : "Done"}</Button>
